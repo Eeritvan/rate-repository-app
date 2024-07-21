@@ -1,7 +1,7 @@
-import { Text as NativeText } from 'react-native';
+import { Platform, Text as NativeText } from 'react-native';
 import { styles, theme } from '../style/style';
 
-export const Text = ({ color, fontSize, fontWeight, style, backGround, ...props }) => {
+const Text = ({ color, fontSize, fontWeight, style, backGround, ...props }) => {
   const textStyle = [
     styles.Text,
     fontSize === 'Tab' && styles.Tab,
@@ -11,8 +11,11 @@ export const Text = ({ color, fontSize, fontWeight, style, backGround, ...props 
     fontSize === 'subheading' && {fontSize: theme.fontSizes.subheading },
     fontWeight === 'bold' && { fontWeight: theme.fontWeights.bold },
     backGround === 'blue' && styles.LanguageBG,
+    { fontFamily: Platform.OS === 'android' ? theme.fonts.android : theme.fonts.ios },
     style,
   ];
 
   return <NativeText style={textStyle} {...props} />;
 };
+
+export default Text;

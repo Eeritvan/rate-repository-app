@@ -15,6 +15,8 @@ export const theme = {
   },
   fonts: {
     main: 'System',
+    android: 'Roboto',
+    ios: 'Arial'
   },
   fontWeights: {
     normal: '400',
@@ -46,6 +48,25 @@ export const styles = StyleSheet.create({
     padding: 4,
     marginTop: 10,
     borderRadius: 5
+  },
+  FieldBox: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderStyle: 'solid',
+    borderColor: theme.colors.textSecondary,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10
+  },
+  SignInButton: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: theme.colors.primary,
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 10
   }
 });
 

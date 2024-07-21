@@ -1,5 +1,5 @@
 import { View, Image } from 'react-native';
-import { Text } from '../Text';
+import Text from '../Text';
 import { RepoStyle } from '../../style/style';
 
 const ItemInfo = ({ ownerAvatarUrl, fullName, description, language }) => {
