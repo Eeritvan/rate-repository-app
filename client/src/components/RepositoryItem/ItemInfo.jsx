@@ -12,9 +12,9 @@ const ItemInfo = ({ ownerAvatarUrl, fullName, description, language }) => {
           />
         </View>
         <View style={RepoStyle.TopInfo}>
-          <Text fontSize='subheading' fontWeight='bold'> {fullName} </Text>
-          <Text color='textSecondary'> {description} </Text>
-          <Text backGround='blue' color='white'> {language} </Text>
+          <Text fontSize='subheading' fontWeight='bold' testID='fullName'> {fullName} </Text>
+          <Text color='textSecondary' testID='description'> {description} </Text>
+          <Text backGround='blue' color='white' testID='language'> {language} </Text>
         </View>
       </View>
     );

@@ -1,12 +1,8 @@
-import Text from './Text';
+import Text from '../Text';
 import { TextInput, Pressable, View } from 'react-native';
 import { useFormik } from 'formik';
-import { styles } from '../style/style';
+import { styles } from '../../style/style';
 import * as yup from 'yup';
-import useSignIn from '../hooks/useSignIn';
-import useAuthStorage from '../hooks/useAuthStorage';
-import { useNavigate } from "react-router-dom";
-import { useApolloClient } from '@apollo/client';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -16,27 +12,11 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Password is required'),
 });
-
-const SignIn = () => {
-  const [signIn] = useSignIn();
-  const authStorage = useAuthStorage();
-  const apolloClient = useApolloClient();
-  const navigate = useNavigate();
-
+  
+const SignInForm = ({onSubmit}) => {
   const initialValues = {
     username: '',
     password: '',
-  };
-
-  const onSubmit = async ({ username, password }) => {
-    try {
-      const response = await signIn({ username, password }); // Use the direct response
-      await authStorage.setAccessToken(response.data.authenticate.accessToken);
-      await apolloClient.resetStore();
-      navigate('/');
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   const formik = useFormik({
@@ -44,7 +24,7 @@ const SignIn = () => {
     validationSchema,
     onSubmit,
   });
-  
+
   return (
     <View>
       <TextInput style={[
@@ -81,4 +61,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInForm;

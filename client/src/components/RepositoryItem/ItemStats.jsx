@@ -11,19 +11,19 @@ const ItemStats = ({ stargazersCount, forksCount, reviewCount, ratingAverage}) =
       return count;
     };
   
-    const Info = ({ count, label }) => (
+    const Info = ({ count, label, testID }) => (
       <View style={RepoStyle.BottomContainer}>
-        <Text fontWeight='bold' fontSize='subheading'> {count} </Text>
+        <Text fontWeight='bold' fontSize='subheading' testID={testID}> {count} </Text>
         <Text color='textSecondary' fontSize='subheading'> {label} </Text>
       </View>
     );
   
     return (
       <View style={RepoStyle.Bottom}>
-        <Info count={countConverter(stargazersCount)} label="Stars" />
-        <Info count={countConverter(forksCount)} label="Forks" />
-        <Info count={countConverter(reviewCount)} label="Reviews" />
-        <Info count={countConverter(ratingAverage)} label="Rating" />
+        <Info count={countConverter(stargazersCount)} label="Stars" testID='Stars' />
+        <Info count={countConverter(forksCount)} label="Forks" testID='Forks' />
+        <Info count={countConverter(reviewCount)} label="Reviews" testID='Reviews' />
+        <Info count={countConverter(ratingAverage)} label="Rating" testID='Rating' />
       </View>
     );
   };

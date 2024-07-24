@@ -14,7 +14,7 @@ const RepositoryItem = ({ repository }) => {
           ratingAverage } = repository;
 
   return (
-    <View style={RepoStyle.Container}>
+    <View style={RepoStyle.Container} testID='repositoryItem'>
       <ItemInfo 
         ownerAvatarUrl={ownerAvatarUrl} 
         fullName={fullName} 
