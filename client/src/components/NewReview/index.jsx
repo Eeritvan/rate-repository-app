@@ -64,7 +64,7 @@ const NewReview = () => {
     initialValues: {
       owner: '',
       repoName: '',
-      rating: 0,
+      rating: '',
       review: ''
     },
     validationSchema,

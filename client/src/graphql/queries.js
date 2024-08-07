@@ -26,14 +26,17 @@ export const GET_ME = gql`
       id
       username
       reviews @include(if: $includeReviews) {
-      edges {
-        node {
-          repository {
-            fullName
+        edges {
+          node {
+            rating
+            createdAt
+            text
+            id
+            repository {
+              fullName
+              id
+            }
           }
-          rating
-          createdAt
-          text
         }
       }
     }
