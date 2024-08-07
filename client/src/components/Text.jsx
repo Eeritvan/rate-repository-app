@@ -7,6 +7,7 @@ const Text = ({ color, fontSize, fontWeight, style, backGround, ...props }) => {
     fontSize === 'Tab' && styles.Tab,
     color === 'textSecondary' && { color: theme.colors.textSecondary },
     color === 'primary' && { color: theme.colors.textPrimary },
+    color === 'primaryBlue' && { color: theme.colors.primary },
     color === 'white' && { color: 'white' },
     fontSize === 'subheading' && {fontSize: theme.fontSizes.subheading },
     fontWeight === 'bold' && { fontWeight: theme.fontWeights.bold },

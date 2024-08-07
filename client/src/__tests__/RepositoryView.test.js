@@ -1,4 +1,4 @@
-import RepositoryListContainer from "../components/RepositoryList/RepositoryListContainer";
+import RepositoryListContainer from '../components/RepositoryList/RepositoryListContainer';
 import { render, screen, within } from '@testing-library/react-native';
 
 describe('RepositoryList', () => {

@@ -8,7 +8,7 @@ const useSignIn = () => {
     const response = await mutate({
       variables: { username, password }
     });
-    return response; // Return the mutation response directly
+    return response;
   };
   return [signIn];
 };

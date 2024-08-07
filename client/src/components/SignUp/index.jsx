@@ -1,8 +1,14 @@
+import { Pressable, TextInput, View, StyleSheet } from 'react-native';
 import Text from '../Text';
-import { TextInput, Pressable, View, StyleSheet } from 'react-native';
 import { useFormik } from 'formik';
 import { theme } from '../../style/style';
 import * as yup from 'yup';
+import useCreateUser from '../../hooks/useCreateUser';
+import useSignIn from '../../hooks/useSignIn';
+import { useNavigate } from "react-router-dom";
+import useAuthStorage from '../../hooks/useAuthStorage';
+import { useApolloClient } from '@apollo/client';
+
 
 const TextField = ({ name, placeholder, formik, secure = false }) => {
   const { handleChange, touched, errors, values } = formik;
@@ -27,29 +33,57 @@ const TextField = ({ name, placeholder, formik, secure = false }) => {
 const validationSchema = yup.object().shape({
   username: yup
     .string()
-    .required('Username is required'),
+    .required('Username is required')
+    .min(5)
+    .max(30),
   password: yup
     .string()
-    .required('Password is required'),
+    .required('Password is required')
+    .min(5)
+    .max(30),
+  passwordConfirm: yup
+    .string()
+    .oneOf([yup.ref('password'), null], "Passwords don't match")
+    .required('Password confirmation is required')
 });
-  
-const SignInForm = ({onSubmit}) => {
+
+const SignUp = () => {
+  const navigate = useNavigate();
+  const [createUser] = useCreateUser();
+  const [signIn] = useSignIn();
+  const authStorage = useAuthStorage();
+  const apolloClient = useApolloClient();
+
+  const onSubmit = async ({ username, password }) => {
+    try {
+      await createUser({ username, password });
+      const response = await signIn({ username, password });
+      await authStorage.setAccessToken(response.data.authenticate.accessToken);
+      await apolloClient.resetStore();
+      navigate('/');
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       username: '',
-      password: ''
+      password: '',
+      passwordConfirm: ''
     },
     validationSchema,
-    onSubmit,
+    onSubmit
   });
 
   return (
     <View style={styles.BG}>
-      <TextField name='username' placeholder='Username' formik={formik} />
-      <TextField name='password' placeholder='Password' formik={formik} secure={true} />
+      <TextField name="username" placeholder="Username" formik={formik} />
+      <TextField name="password" placeholder="Password" formik={formik} secure={true} />
+      <TextField name="passwordConfirm" placeholder="Password confirmation" formik={formik} secure={true} />
       <Pressable style={ styles.SignInButton } onPress={formik.handleSubmit}>
         <Text color='white' fontWeight='bold' fontSize='subheading'>
-          Sign in
+          Sign up
         </Text>
       </Pressable>
     </View>
@@ -80,4 +114,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignInForm;
+export default SignUp;
