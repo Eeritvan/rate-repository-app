@@ -7,6 +7,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import SingleRepository from './SingleRepository';
 import NewReview from './NewReview';
+import OwnReviews from './OwnReviews';
 
 const Main = () => {
   return (
@@ -18,6 +19,7 @@ const Main = () => {
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/newReview" element={<NewReview />} />
+        <Route path="/ownReviews" element={<OwnReviews />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

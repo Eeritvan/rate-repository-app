@@ -1,4 +1,5 @@
-import { View, StyleSheet, Dimensions } from 'react-native';
+import useMe from "../../hooks/useMe";
+import { View, StyleSheet, Dimensions, FlatList } from 'react-native';
 import Text from "../Text";
 import { theme } from '../../style/style';
 import { format } from 'date-fns';
@@ -16,7 +17,7 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={styles.Info}>
         <Text color='primary' fontWeight='bold'>
-          {review.user.username}
+          {review.repository.fullName}
         </Text>
         <Text color='textSecondary'>
           {formatedDate}
@@ -26,6 +27,17 @@ const ReviewItem = ({ review }) => {
         </Text>
       </View>
     </View>
+  );
+};
+
+const OwnReviews = () => {
+  const { data } = useMe(fetchReviews = true);
+
+  return (
+    <FlatList
+        data={data.reviews.edges}
+        renderItem={({ item }) => <ReviewItem review={item.node} />}
+    />
   );
 };
 
@@ -49,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
-  }
+  },
 });
 
-export default ReviewItem;
+export default OwnReviews;
